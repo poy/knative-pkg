@@ -47,34 +47,34 @@ var (
 	successTagKey    = mustNewTagKey("success")
 )
 
-func init() {
-	// Create views to see our measurements. This can return an error if
-	// a previously-registered view has the same name with a different value.
-	// View name defaults to the measure name if unspecified.
-	err := view.Register(
-		&view.View{
-			Description: "Depth of the work queue",
-			Measure:     workQueueDepthStat,
-			Aggregation: view.LastValue(),
-			TagKeys:     []tag.Key{reconcilerTagKey},
-		},
-		&view.View{
-			Description: "Number of reconcile operations",
-			Measure:     reconcileCountStat,
-			Aggregation: view.Count(),
-			TagKeys:     []tag.Key{reconcilerTagKey, keyTagKey, successTagKey},
-		},
-		&view.View{
-			Description: "Latency of reconcile operations",
-			Measure:     reconcileLatencyStat,
-			Aggregation: reconcileDistribution,
-			TagKeys:     []tag.Key{reconcilerTagKey, keyTagKey, successTagKey},
-		},
-	)
-	if err != nil {
-		panic(err)
-	}
-}
+// func init() {
+// 	// Create views to see our measurements. This can return an error if
+// 	// a previously-registered view has the same name with a different value.
+// 	// View name defaults to the measure name if unspecified.
+// 	err := view.Register(
+// 		&view.View{
+// 			Description: "Depth of the work queue",
+// 			Measure:     workQueueDepthStat,
+// 			Aggregation: view.LastValue(),
+// 			TagKeys:     []tag.Key{reconcilerTagKey},
+// 		},
+// 		&view.View{
+// 			Description: "Number of reconcile operations",
+// 			Measure:     reconcileCountStat,
+// 			Aggregation: view.Count(),
+// 			TagKeys:     []tag.Key{reconcilerTagKey, keyTagKey, successTagKey},
+// 		},
+// 		&view.View{
+// 			Description: "Latency of reconcile operations",
+// 			Measure:     reconcileLatencyStat,
+// 			Aggregation: reconcileDistribution,
+// 			TagKeys:     []tag.Key{reconcilerTagKey, keyTagKey, successTagKey},
+// 		},
+// 	)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// }
 
 // StatsReporter defines the interface for sending metrics
 type StatsReporter interface {
